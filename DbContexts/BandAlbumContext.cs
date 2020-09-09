@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BandAPI.Entities;
 using Microsoft.EntityFrameworkCore;
-using BandAPI.Entities;
-using System.Data;
+using System;
 
 namespace BandAPI.DbContexts
 {
@@ -61,32 +57,28 @@ namespace BandAPI.DbContexts
                 new Album()
                 {
                     Id = Guid.Parse("2e04d996-c2f6-4e98-ba36-2b7a1d619e0b"),
-                    Title = "Master of Puppets",
+                    Title = "GunsNRoses Album",
                     Description = "One of the best ever",
                     BandId = Guid.Parse("fa6f8bb2c-b1d9-4e9e-8963-45a5ec726530"),
                 },
                 new Album()
                 {
                     Id = Guid.Parse("4e04f9d4-001a-4f94-955a-63375f9494bd"),
-                    Title = "Master of Puppets",
+                    Title = "Abba Album",
                     Description = "One of the best ever",
                     BandId = Guid.Parse("cd411bd8-dfb2-4c8f-a40a-20a8aa75cae4"),
                 },
                 new Album()
                 {
                     Id = Guid.Parse("8d9c939c-800b-45b6-a197-9bd907e5a495"),
-                    Title = "Master of Puppets",
+                    Title = "Oasis Album",
                     Description = "One of the best ever",
                     BandId = Guid.Parse("fa5080395-cf13-43dd-8484-4449a5259e6b"),
-                },
+                });
+
+            base.OnModelCreating(modelBuilder);
         }
 
-        //
 
-        //
-
-        //
-
-        //
     }
 }
