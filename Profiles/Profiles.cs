@@ -11,7 +11,7 @@ namespace BandAPI.Profiles
     {
         public BandsProfile()
         {
-            CreateMap<Entities.Band, Models.BandDto>()
+            CreateMap<Entities.Band, Models.BandDto>() //src , dest
                 .ForMember(
                     dest => dest.FoundedYearsAgo,
 
