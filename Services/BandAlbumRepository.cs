@@ -40,7 +40,7 @@ namespace BandAPI.Services
             _context.Bands.Add(band);
         }
 
-        public bool AlbumExist(Guid albumId)
+        public bool AlbumExists(Guid albumId)
         {
             if (albumId == Guid.Empty)
                 throw new ArgumentNullException(nameof(albumId));
@@ -48,7 +48,7 @@ namespace BandAPI.Services
             return _context.Albums.Any(a => a.Id == albumId);
         }
 
-        public bool BandExist(Guid bandId)
+        public bool BandExists(Guid bandId)
         {
             if (bandId == Guid.Empty)
                 throw new ArgumentNullException(nameof(bandId));
@@ -134,6 +134,18 @@ namespace BandAPI.Services
             //    throw new ArgumentNullException();
 
             //_context.Bands.Update(band);
+        }
+
+        public IEnumerable<Band> GetBands(string mainGenre)
+        { 
+        
+            if (string.IsNullOrWhiteSpace(mainGenre))
+            {
+                return GetBands();
+            }
+
+            mainGenre = mainGenre.Trim();
+            return _context.Bands.Where(b => b.MainGenre == mainGenre).ToList();
         }
     }
 }

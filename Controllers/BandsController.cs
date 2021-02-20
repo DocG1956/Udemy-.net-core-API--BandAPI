@@ -12,7 +12,7 @@ using AutoMapper;
 namespace BandAPI.Controllers
 {
     [ApiController]
-    [Route("api/bands")]
+    [Route("/api/Bands/")]
     public class BandsController : ControllerBase
     {
         private readonly IBandAlbumRepository _bandAlbumRepository;
@@ -24,15 +24,23 @@ namespace BandAPI.Controllers
             _mapper = mapper?? throw new ArgumentNullException(nameof(mapper));
         }
 
+        [HttpGet]
+        [HttpHead]
+        public IActionResult GetBands()
+        {
+            //throw new Exception("woops");
+            return GetBands1();
+        }
+
         //This is the original GetBands controller method prior to implementing BandDto or IMapper
-        [HttpGet("/GetBands1")]
+        [HttpGet("GetBands1")]
         public IActionResult GetBands1()
         {
             var bandsFromRepo = _bandAlbumRepository.GetBands();
             return Ok(bandsFromRepo);
         }
 
-        [HttpGet("/GetBandsDtoModel")]
+        [HttpGet("GetBandsDtoModel")]
         public ActionResult<IEnumerable<BandDto>> GetBandsDtoModel()
         {
             var bandsFromRepo = _bandAlbumRepository.GetBands();
@@ -53,11 +61,11 @@ namespace BandAPI.Controllers
 
         }
 
-        [HttpGet("/GetBandsIMapper")]
+        [HttpGet("GetBandsIMapper")]
         public ActionResult<IEnumerable<BandDto>> GetBandsIMapper()
         {
             var bandsFromRepo = _bandAlbumRepository.GetBands();
-            var bandsDto = new List<BandDto>();
+            //var bandsDto = new List<BandDto>();
 
             //foreach (var band in bandsFromRepo)
             //{
@@ -72,6 +80,20 @@ namespace BandAPI.Controllers
 
             return Ok(_mapper.Map<IEnumerable<BandDto>>(bandsFromRepo));
 
+        }
+
+        [HttpGet("mainGenre")]
+        public ActionResult<IEnumerable<BandDto>> GetBandsByGenreParam([FromQuery] string mainGenre)
+        {
+            var bandsFromRepo = _bandAlbumRepository.GetBands(mainGenre);
+            return Ok(_mapper.Map<IEnumerable<BandDto>>(bandsFromRepo));
+        }
+
+        [HttpGet("mainGenre/{mainGenre}")]
+        public ActionResult<IEnumerable<BandDto>> GetBandsByGenreURI(string mainGenre)
+        {
+            var bandsFromRepo = _bandAlbumRepository.GetBands(mainGenre);
+            return Ok(_mapper.Map<IEnumerable<BandDto>>(bandsFromRepo));
         }
 
         [HttpGet("{bandId}")]

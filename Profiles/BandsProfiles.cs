@@ -16,12 +16,14 @@ namespace BandAPI.Profiles
                     dest => dest.FoundedYearsAgo,
 
                     //single line implementation of string interpolation
-                    opt => opt.MapFrom(src => $"{src.Founded.ToString("yyyy") + (src.Founded.GetYearsAgo()) + " years ago"}"));
-                    
+                    //this line did not work. It apparently added the values.
+                    //opt => opt.MapFrom(src => $"{src.Founded.ToString("yyyy") + (src.Founded.GetYearsAgo()) + " years ago"}"));
+
                     // Double line implementation of string interpolation
-                    //opt => opt.MapFrom(src => $"{src.Founded.ToString("yyyy")} " +
-                    //$"({src.Founded.GetYearsAgo()}) years ago"));
-                    
+                    // This works
+                    opt => opt.MapFrom(src => $"{src.Founded.ToString("yyyy")} " +
+                    $"({src.Founded.GetYearsAgo()}) years ago"));
+
         }
     }
 }
