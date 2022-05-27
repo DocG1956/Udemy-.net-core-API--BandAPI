@@ -31,6 +31,7 @@ namespace BandAPI.Controllers
 
             var albumsFromRepo = _bandAlbumRepository.GetAlbums(bandId);
             return Ok(_mapper.Map<IEnumerable<AlbumsDto>>(albumsFromRepo));
+
         }
 
         [HttpGet("{albumId}")]
