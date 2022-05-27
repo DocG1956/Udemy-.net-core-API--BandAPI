@@ -21,6 +21,7 @@ namespace BandAPI.Controllers
         {
             _bandAlbumRepository = bandAlbumRepository ?? throw new ArgumentNullException(nameof(bandAlbumRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+
         }
 
         [HttpGet]
